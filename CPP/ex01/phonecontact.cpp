@@ -6,7 +6,7 @@
 /*   By: ted-dafi <ted-dafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 09:34:59 by ted-dafi          #+#    #+#             */
-/*   Updated: 2022/06/22 11:04:32 by ted-dafi         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:40:22 by ted-dafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,22 @@ class Contact
 		std::string	nickname;
 		std::string	phonenum;
 		std::string	darkest_secret;
+		std::string	End;
 };
 
 void	print_string(int len, char *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && i != 9)
-	{
-		std::cout << s[i];
-		i++;
-	}
-	if (i == 9)
-		std::cout << '.';
-	while (i++ < 9)
-		std::cout << ' ';
+	std::cout << s << '\n';
 }
 
 void	check_lens(Contact contact, int *batata)
 {
 	std::string	*s;
-	int		i = 0;
 
 	s = (std::string *)&contact;
-	while (i < 5)
+	while (!s->empty())
 	{
 		print_string(s->length(), (char *)&(*s));
-		i++;
 		s++;
 	}
 }
@@ -71,14 +59,15 @@ class PhoneBook
 			std::cin >> contacts[index].phonenum;
 			std::cout << "Darkest secret: ";
 			std::cin >> contacts[index].darkest_secret;
+			contacts[index].End.clear();
 		}
-		void print()
+		void print(int i)
 		{
 			i = 0;
 			while (i < 8)
 			{
-				check_lens(contacts[i], batata);
-			i++;
+			check_lens(contacts[i], batata);
+				i++;
 			}
 		}
 };
@@ -88,5 +77,5 @@ int	main()
 	PhoneBook book;
 
 	book.set_contact(1);
-	book.print();
+	book.print(1);
 }
